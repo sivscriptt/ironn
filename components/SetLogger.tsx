@@ -5,6 +5,7 @@ import { useState } from "react";
 import type { Exercise } from "@/data/plan";
 import { useStore, type SetLog } from "@/lib/store";
 import { Checkbox } from "./Checkbox";
+import { ExerciseImage } from "./ExerciseImage";
 
 type Props = {
   sessionId: string;
@@ -36,15 +37,19 @@ export function SetLogger({ sessionId, exercise, loggedSets, lastSetEver, onSetL
   return (
     <div className="bg-card border border-border rounded-2xl overflow-hidden">
       {/* HEADER */}
-      <div className="px-4 py-3 flex items-center justify-between border-b border-border">
+      <div className="px-3 py-3 flex items-center gap-3 border-b border-border">
+        <ExerciseImage
+          slug={exercise.image}
+          className="w-14 h-14 rounded-lg shrink-0"
+        />
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <div className="text-sm font-semibold">{exercise.name}</div>
+            <div className="text-sm font-semibold truncate">{exercise.name}</div>
             {isDone && (
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                className="w-5 h-5 rounded-full bg-accent flex items-center justify-center"
+                className="w-5 h-5 rounded-full bg-accent flex items-center justify-center shrink-0"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3">
                   <polyline points="20 6 9 17 4 12" />
@@ -56,7 +61,7 @@ export function SetLogger({ sessionId, exercise, loggedSets, lastSetEver, onSetL
             {exercise.sets} × {exercise.reps} · {exercise.restSec}s rest
           </div>
         </div>
-        <div className="text-xs font-mono text-muted">
+        <div className="text-xs font-mono text-muted shrink-0">
           <span className={isDone ? "text-accent" : "text-text"}>{setsDone}</span>
           <span className="text-muted">/{exercise.sets}</span>
         </div>

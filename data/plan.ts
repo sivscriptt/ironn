@@ -22,7 +22,15 @@ export type Exercise = {
   restSec: number;
   notes?: string;
   isMainLift?: boolean; // tracked for strength progression chart
+  image?: string; // Free Exercise DB slug — fetches 0.jpg/1.jpg frames
 };
+
+export const EXERCISE_IMG_BASE =
+  "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/";
+
+export function exerciseFrameUrl(slug: string, frame: 0 | 1 = 0): string {
+  return `${EXERCISE_IMG_BASE}${slug}/${frame}.jpg`;
+}
 
 export type FinisherStep = {
   name: string;
@@ -270,13 +278,13 @@ export const PLAN = {
         { name: "Light warm-up bench set", detail: "1 set" },
       ],
       exercises: [
-        { key: "db-bench", name: "Dumbbell bench press", sets: 4, reps: "8-10", restSec: 90, isMainLift: true },
-        { key: "seated-cable-row", name: "Seated cable row", sets: 4, reps: "10-12", restSec: 90, isMainLift: true },
-        { key: "db-shoulder-press", name: "Dumbbell shoulder press", sets: 3, reps: "10-12", restSec: 90, isMainLift: true },
-        { key: "lat-pulldown", name: "Wide-grip lat pulldown", sets: 3, reps: "10-12", restSec: 90 },
-        { key: "side-lateral-raise", name: "Side lateral raise", sets: 3, reps: "15", restSec: 75 },
-        { key: "tri-pushdown", name: "Triceps pushdown", sets: 3, reps: "12-15", restSec: 75 },
-        { key: "db-curl", name: "Dumbbell bicep curl", sets: 3, reps: "10-12", restSec: 75 },
+        { key: "db-bench", name: "Dumbbell bench press", sets: 4, reps: "8-10", restSec: 90, isMainLift: true, image: "Dumbbell_Bench_Press" },
+        { key: "seated-cable-row", name: "Seated cable row", sets: 4, reps: "10-12", restSec: 90, isMainLift: true, image: "Seated_Cable_Rows" },
+        { key: "db-shoulder-press", name: "Dumbbell shoulder press", sets: 3, reps: "10-12", restSec: 90, isMainLift: true, image: "Seated_Dumbbell_Press" },
+        { key: "lat-pulldown", name: "Wide-grip lat pulldown", sets: 3, reps: "10-12", restSec: 90, image: "Wide-Grip_Lat_Pulldown" },
+        { key: "side-lateral-raise", name: "Side lateral raise", sets: 3, reps: "15", restSec: 75, image: "Side_Lateral_Raise" },
+        { key: "tri-pushdown", name: "Triceps pushdown", sets: 3, reps: "12-15", restSec: 75, image: "Triceps_Pushdown" },
+        { key: "db-curl", name: "Dumbbell bicep curl", sets: 3, reps: "10-12", restSec: 75, image: "Dumbbell_Bicep_Curl" },
       ],
       finisher: [
         { name: "Cable crunches", sets: 3, reps: "15" },
@@ -305,12 +313,12 @@ export const PLAN = {
         { name: "Light goblet squat", detail: "1 warm-up set" },
       ],
       exercises: [
-        { key: "goblet-squat", name: "Goblet squat", sets: 4, reps: "10-12", restSec: 90, isMainLift: true },
-        { key: "rdl", name: "Romanian deadlift", sets: 4, reps: "8-10", restSec: 90, isMainLift: true },
-        { key: "walking-lunges", name: "Walking lunges", sets: 3, reps: "20 steps", restSec: 90 },
-        { key: "leg-press", name: "Leg press", sets: 3, reps: "12", restSec: 75, isMainLift: true },
-        { key: "lying-leg-curl", name: "Lying leg curl", sets: 3, reps: "12", restSec: 75 },
-        { key: "calf-raise", name: "Standing calf raise", sets: 4, reps: "15-20", restSec: 60 },
+        { key: "goblet-squat", name: "Goblet squat", sets: 4, reps: "10-12", restSec: 90, isMainLift: true, image: "Dumbbell_Squat" },
+        { key: "rdl", name: "Romanian deadlift", sets: 4, reps: "8-10", restSec: 90, isMainLift: true, image: "Romanian_Deadlift" },
+        { key: "walking-lunges", name: "Walking lunges", sets: 3, reps: "20 steps", restSec: 90, image: "Dumbbell_Lunges" },
+        { key: "leg-press", name: "Leg press", sets: 3, reps: "12", restSec: 75, isMainLift: true, image: "Leg_Press" },
+        { key: "lying-leg-curl", name: "Lying leg curl", sets: 3, reps: "12", restSec: 75, image: "Lying_Leg_Curls" },
+        { key: "calf-raise", name: "Standing calf raise", sets: 4, reps: "15-20", restSec: 60, image: "Standing_Calf_Raises" },
       ],
       finisher: [
         { name: "Cable crunches", sets: 3, reps: "15" },
@@ -354,13 +362,13 @@ export const PLAN = {
         { name: "Light incline press set", detail: "1 warm-up" },
       ],
       exercises: [
-        { key: "incline-db-press", name: "Incline dumbbell press", sets: 4, reps: "8-10", restSec: 90, isMainLift: true },
-        { key: "bent-db-row", name: "Bent over dumbbell row", sets: 4, reps: "10", restSec: 90, isMainLift: true },
-        { key: "arnold-press", name: "Arnold press", sets: 3, reps: "10-12", restSec: 90, isMainLift: true },
-        { key: "cable-fly", name: "Cable chest fly", sets: 3, reps: "12-15", restSec: 75 },
-        { key: "face-pull", name: "Face pulls", sets: 3, reps: "15", restSec: 60 },
-        { key: "overhead-tri", name: "Overhead tricep extension", sets: 3, reps: "12", restSec: 75 },
-        { key: "hammer-curl", name: "Hammer curl", sets: 3, reps: "12", restSec: 75 },
+        { key: "incline-db-press", name: "Incline dumbbell press", sets: 4, reps: "8-10", restSec: 90, isMainLift: true, image: "Incline_Dumbbell_Press" },
+        { key: "bent-db-row", name: "Bent over dumbbell row", sets: 4, reps: "10", restSec: 90, isMainLift: true, image: "Bent_Over_Two-Dumbbell_Row" },
+        { key: "arnold-press", name: "Arnold press", sets: 3, reps: "10-12", restSec: 90, isMainLift: true, image: "Arnold_Dumbbell_Press" },
+        { key: "cable-fly", name: "Cable chest fly", sets: 3, reps: "12-15", restSec: 75, image: "Cable_Crossover" },
+        { key: "face-pull", name: "Face pulls", sets: 3, reps: "15", restSec: 60, image: "Face_Pull" },
+        { key: "overhead-tri", name: "Overhead tricep extension", sets: 3, reps: "12", restSec: 75, image: "Seated_Triceps_Press" },
+        { key: "hammer-curl", name: "Hammer curl", sets: 3, reps: "12", restSec: 75, image: "Hammer_Curls" },
       ],
       finisher: [
         { name: "Cable crunches", sets: 3, reps: "15" },
@@ -389,12 +397,12 @@ export const PLAN = {
         { name: "Light RDL set", detail: "1 warm-up" },
       ],
       exercises: [
-        { key: "rdl-b", name: "Romanian deadlift", sets: 4, reps: "8-10", restSec: 90, isMainLift: true },
-        { key: "bulgarian-split", name: "Bulgarian split squat", sets: 3, reps: "8 each leg", restSec: 90, isMainLift: true },
-        { key: "hip-thrust", name: "Barbell/DB hip thrust", sets: 3, reps: "12", restSec: 90, isMainLift: true },
-        { key: "leg-extension", name: "Leg extension", sets: 3, reps: "15", restSec: 75 },
-        { key: "seated-leg-curl", name: "Seated leg curl", sets: 3, reps: "12", restSec: 75 },
-        { key: "seated-calf", name: "Seated calf raise", sets: 3, reps: "15-20", restSec: 60 },
+        { key: "rdl-b", name: "Romanian deadlift", sets: 4, reps: "8-10", restSec: 90, isMainLift: true, image: "Romanian_Deadlift" },
+        { key: "bulgarian-split", name: "Bulgarian split squat", sets: 3, reps: "8 each leg", restSec: 90, isMainLift: true, image: "Bulgarian_Split_Squat" },
+        { key: "hip-thrust", name: "Barbell/DB hip thrust", sets: 3, reps: "12", restSec: 90, isMainLift: true, image: "Hip_Thrusts_With_Bands" },
+        { key: "leg-extension", name: "Leg extension", sets: 3, reps: "15", restSec: 75, image: "Leg_Extensions" },
+        { key: "seated-leg-curl", name: "Seated leg curl", sets: 3, reps: "12", restSec: 75, image: "Seated_Leg_Curl" },
+        { key: "seated-calf", name: "Seated calf raise", sets: 3, reps: "15-20", restSec: 60, image: "Seated_Calf_Raise" },
       ],
       finisher: [
         { name: "Dead bug", sets: 3, reps: "10 each side" },
